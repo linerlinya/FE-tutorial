@@ -4,23 +4,32 @@
 
 ECMAScript 标准规定了 7 种数据类型，其把这7种数据类型又分为两种：
 
-**基础类型（原始类型）：**
+基础类型（原始类型）：
 
-**Null**
-**Undefined**
-**Boolean**：布尔
-**Number**：双精度浮点型，还有一些特殊值（-Infinity、+Infinity、NaN）
-**String**：字符串
-**Symbol**：一种实例是唯一且不可改变的数据类型（es6）
-**BigInt**：任意精度的大整数（es10）
+`Null`
 
-![](./img/0-null-undefined.png)
+`Undefined`
 
-**引用类型（对象类型）：**
+`Boolean`：布尔
 
-**Object**：对象
-**Function**：函数
-**Array**：数组
+`Number`：双精度浮点型，还有一些特殊值（-Infinity、+Infinity、NaN）
+
+`String`：字符串
+
+`Symbol`：一种实例是唯一且不可改变的数据类型（es6）
+
+`BigInt`：任意精度的大整数（es10）
+
+![0-null-undefined.png](./img/0-null-undefined.png)
+
+引用类型（对象类型）：
+
+`Object`：对象
+
+`Function`：函数
+
+`Array`：数组
+
 ……
 
 ### 基础类型与引用类型区别
@@ -43,7 +52,7 @@ ECMAScript 标准规定了 7 种数据类型，其把这7种数据类型又分�
 
 原始类型的值被直接存储在栈中，在变量定义时，栈就为其分配好了内存空间
 
-![](./img/primitive-values.png)
+![primitive-values.png](./img/primitive-values.png)
 
 由于栈中的内存空间的大小是固定的，那么注定了存储在栈中的变量就是不可变的
 
@@ -60,7 +69,7 @@ str += '6'
 console.log(str);  // ahabhgk6
 ```
 
-![](./img/str.png)
+![str.png](./img/str.png)
 
 ### 引用类型：
 
@@ -72,7 +81,7 @@ var fn = function () {}
 var arr = [1, 2, 3]
 ```
 
-![](./img/ref-values.png)
+![ref-values.png](./img/ref-values.png)
 
 引用类型就不再具有不可变性了，我们可以轻易的改变它们：
 
@@ -124,13 +133,14 @@ false
 > 引用类型和包装类型的主要区别就是对象的生存期，使用new操作符创建的引用类型的实例，在执行流离开当前作用域之前都一直保存在内存中，而自基本类型则只存在于一行代码的执行瞬间，然后立即被销毁，这意味着我们不能在运行时为基本类型添加属性和方法。
 
 #### 装箱和拆箱
+
 装箱转换：把基本类型转换为对应的包装类型
 
 拆箱操作：把引用类型转换为基本类型
 
-**既然原始类型不能扩展属性和方法，那么我们是如何使用原始类型调用方法的呢？**
+既然原始类型不能扩展属性和方法，那么我们是如何使用原始类型调用方法的呢？
 
-**装箱：**
+装箱：
 
 ```js
 var str = 'ahabhgk';
@@ -145,7 +155,7 @@ var slicedStr = str.slice(1)
 
 也就是说，我们使用基本类型调用方法，就会自动进行装箱和拆箱操作，相同的，我们使用 Number 和 Boolean 类型时，也会发生这个过程。
 
-**拆箱：**
+拆箱：
 
 从引用类型到基本类型的转换，也就是拆箱的过程中，会遵循 ECMAScript 规范规定的 toPrimitive 原则，一般会调用引用类型的 valueOf 和 toString 方法，你也可以直接重写 toPeimitive 方法。一般转换成不同类型的值遵循的原则不同，例如：
 
@@ -490,7 +500,7 @@ for (let i = 0; i < 5; i++) {
 
 只是摘出来一部分（如果代码写的规范的话，很多部分都遇不到），更具体的看这篇：[你真的掌握变量和类型了吗？](https://juejin.im/post/5cec1bcff265da1b8f1aa08f)
 
-作业：
+Think:
 
 1. 学习闭包
     虽然可能很长时间都不会用到，但闭包在 JavaScript 是很重要的，闭包学得好不仅可以为以后函数式编程、学习框架等打下基础，还可以通过闭包理解很多东西：
@@ -547,6 +557,7 @@ for (let i = 0; i < 5; i++) {
     add(1)(2)(3) // 6
     add(1)(2)(3)(4) // 10
     ```
+
     提示：重写 toString 方法
 
     </summary>
@@ -566,7 +577,9 @@ for (let i = 0; i < 5; i++) {
 
     </details>
 
-**推荐：**
+推荐：
+
 * [JavaScript 高级程序设计](https://book.douban.com/subject/10546125/)
+* [你不知道的 JavaScript](https://github.com/getify/You-Dont-Know-JS)
 * [冴羽的博客](https://github.com/mqyqingfeng/Blog)
 * [阮一峰 es6](http://es6.ruanyifeng.com/)
