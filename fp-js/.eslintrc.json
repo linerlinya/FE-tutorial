@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "plugins": [
+    "fp"
+  ],
+  "extends": "plugin:fp/recommended",
+  "rules": {
+    "semi": "off"
+  }
+}

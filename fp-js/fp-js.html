@@ -1,0 +1,584 @@
+<!DOCTYPE html><html><head>
+      <title>fp-js</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/ahabhgk/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.4.3/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="half-fp-js-pointfree-js">half-fp-js: pointfree-js &#x1F436;</h1>
+
+<p>half &#x7684;&#x539F;&#x56E0;&#xFF1A;</p>
+<ul>
+<li>&#x53E6;&#x5916;&#x4E00;&#x534A;&#x770B;&#x4E0D;&#x61C2;</li>
+<li>&#x56E0;&#x4E3A;&#x7EAF;&#x51FD;&#x6570;&#x8981;&#x907F;&#x514D;&#x526F;&#x4F5C;&#x7528;&#xFF0C;&#x5BF9;&#x4E8E;&#x524D;&#x7AEF;&#x7ECF;&#x5E38;&#x64CD;&#x4F5C; DOM &#x53EF;&#x80FD;&#x6BD4;&#x8F83;&#x4E25;&#x683C;&#xFF08;&#x73B0;&#x5728;&#x4F7F;&#x7528;&#x6846;&#x67B6;&#x8BA9;&#x6846;&#x67B6;&#x5904;&#x7406; DOM &#x90E8;&#x5206;&#xFF0C;&#x8FD8;&#x662F;&#x53EF;&#x884C;&#x7684;&#xFF09;</li>
+<li>pointfree &#x90E8;&#x5206;&#x5728;&#x4F7F;&#x7528;&#x539F;&#x751F; JS &#x65F6;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x8FD8;&#x662F;&#x633A;&#x591A;&#x7684;</li>
+</ul>
+<h2 class="mume-header" id="%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90">&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;</h2>
+
+<p>&#x6211;&#x4EEC;&#x4ECE;&#x4E00;&#x4E2A;&#x611A;&#x8822;&#x7684;&#x4F8B;&#x5B50;&#x5F00;&#x59CB;&#x3002;&#x9E1F;&#x7FA4;&#x5408;&#x5E76;&#x5219;&#x53D8;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x66F4;&#x5927;&#x7684;&#x9E1F;&#x7FA4;&#xFF0C;&#x7E41;&#x6B96;&#x5219;&#x589E;&#x52A0;&#x4E86;&#x9E1F;&#x7FA4;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x589E;&#x52A0;&#x7684;&#x6570;&#x91CF;&#x5C31;&#x662F;&#x5B83;&#x4EEC;&#x7E41;&#x6B96;&#x51FA;&#x6765;&#x7684;&#x9E1F;&#x7684;&#x6570;&#x91CF;&#x3002;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x5E76;&#x4E0D;&#x662F;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x826F;&#x597D;&#x5B9E;&#x8DF5;&#xFF0C;&#x5B83;&#x53EA;&#x662F;&#x5F3A;&#x8C03;&#x5F53;&#x524D;&#x8FD9;&#x79CD;&#x53D8;&#x91CF;&#x8D4B;&#x503C;&#x65B9;&#x5F0F;&#x7684;&#x4E00;&#x4E9B;&#x5F0A;&#x7AEF;&#x3002;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// &#x9E1F;&#x7FA4;</span>
+<span class="token keyword">class</span> <span class="token class-name">Flock</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>seagulls <span class="token operator">=</span> n
+  <span class="token punctuation">}</span>
+  <span class="token comment">// &#x5408;&#x5E76;</span>
+  <span class="token function">conjoin</span><span class="token punctuation">(</span><span class="token parameter">other</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>seagulls <span class="token operator">+=</span> other<span class="token punctuation">.</span>seagulls
+    <span class="token keyword">return</span> <span class="token keyword">this</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// &#x7E41;&#x6B96;</span>
+  <span class="token function">breed</span><span class="token punctuation">(</span><span class="token parameter">other</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>seagulls <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>seagulls <span class="token operator">*</span> other<span class="token punctuation">.</span>seagulls
+    <span class="token keyword">return</span> <span class="token keyword">this</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> flockA <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Flock</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> flockB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Flock</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> flockC <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Flock</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> flockA
+  <span class="token punctuation">.</span><span class="token function">conjoin</span><span class="token punctuation">(</span>flockC<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">breed</span><span class="token punctuation">(</span>flockB<span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">conjoin</span><span class="token punctuation">(</span>flockA<span class="token punctuation">.</span><span class="token function">breed</span><span class="token punctuation">(</span>flockB<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// &#x5185;&#x90E8;&#x72B6;&#x6001;&#x88AB;&#x6539;&#x53D8;</span>
+  <span class="token punctuation">.</span>seagulls
+<span class="token comment">// 32</span>
+</pre><p>&#x5982;&#x679C;&#x4F60;&#x770B;&#x4E0D;&#x61C2;&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#xFF0C;&#x6CA1;&#x5173;&#x7CFB;&#xFF0C;&#x6211;&#x4E5F;&#x770B;&#x4E0D;&#x61C2;&#x3002;&#x91CD;&#x70B9;&#x662F;&#x72B6;&#x6001;&#x548C;&#x53EF;&#x53D8;&#x503C;&#x975E;&#x5E38;&#x96BE;&#x4EE5;&#x8FFD;&#x8E2A;&#xFF0C;&#x5373;&#x4FBF;&#x662F;&#x5728;&#x8FD9;&#x4E48;&#x5C0F;&#x7684;&#x4E00;&#x4E2A;&#x7A0B;&#x5E8F;&#x4E2D;&#x4E5F;&#x4E0D;&#x4F8B;&#x5916;&#x3002;</p>
+<p>&#x8BD5;&#x8BD5;&#x53E6;&#x4E00;&#x79CD;&#x66F4;&#x51FD;&#x6570;&#x5F0F;&#x7684;&#x5199;&#x6CD5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">conjoin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">flockX<span class="token punctuation">,</span> flockY</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> flockX <span class="token operator">+</span> flockY<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">breed</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">flockX<span class="token punctuation">,</span> flockY</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> flockX <span class="token operator">*</span> flockY<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> flockA <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> flockB <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> flockC <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span>
+    <span class="token function">conjoin</span><span class="token punctuation">(</span><span class="token function">breed</span><span class="token punctuation">(</span>flockB<span class="token punctuation">,</span> <span class="token function">conjoin</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockC<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">breed</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockB<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// 16</span>
+</pre><p>&#x6211;&#x4EEC;&#x628A;&#x5B83;&#x4EEC;&#x91CD;&#x547D;&#x540D;&#x4E00;&#x4E0B;&#xFF0C;&#x770B;&#x770B;&#x5B83;&#x4EEC;&#x7684;&#x771F;&#x9762;&#x76EE;&#x3002;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">add</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">multiply</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> x <span class="token operator">*</span> y<span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> flockA <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> flockB <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> flockC <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span>
+    <span class="token function">add</span><span class="token punctuation">(</span><span class="token function">multiply</span><span class="token punctuation">(</span>flockB<span class="token punctuation">,</span> <span class="token function">add</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockC<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">multiply</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockB<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// 16</span>
+</pre><p>&#x8FD9;&#x4E48;&#x4E00;&#x6765;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x6211;&#x4EEC;&#x4E0D;&#x8FC7;&#x662F;&#x5728;&#x8FD0;&#x7528;&#x65E9;&#x5DF2;&#x83B7;&#x5F97;&#x7684;&#x77E5;&#x8BC6;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// &#x7ED3;&#x5408;&#x5F8B;&#xFF08;assosiative&#xFF09;</span>
+<span class="token function">add</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> z<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token function">add</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// &#x4EA4;&#x6362;&#x5F8B;&#xFF08;commutative&#xFF09;</span>
+<span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">add</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> x<span class="token punctuation">)</span>
+
+<span class="token comment">// &#x540C;&#x4E00;&#x5F8B;&#xFF08;identity&#xFF09;</span>
+<span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">===</span> x
+
+<span class="token comment">// &#x5206;&#x914D;&#x5F8B;&#xFF08;distributive&#xFF09;</span>
+<span class="token function">multiply</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token function">add</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token function">multiply</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">multiply</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>&#x8FD0;&#x7528;&#x8FD9;&#x4E9B;&#x5B9A;&#x5F8B;&#x7B80;&#x5316;&#x8FD9;&#x4E2A;&#x6D77;&#x9E25;&#x5C0F;&#x7A0B;&#x5E8F;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// &#x539F;&#x6709;&#x4EE3;&#x7801;</span>
+<span class="token function">add</span><span class="token punctuation">(</span><span class="token function">multiply</span><span class="token punctuation">(</span>flockB<span class="token punctuation">,</span> <span class="token function">add</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockC<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">multiply</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockB<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// &#x5E94;&#x7528;&#x540C;&#x4E00;&#x5F8B;&#xFF0C;&#x53BB;&#x6389;&#x591A;&#x4F59;&#x7684;&#x52A0;&#x6CD5;&#x64CD;&#x4F5C;&#xFF08;add(flockA, flockC) == flockA&#xFF09;</span>
+<span class="token function">add</span><span class="token punctuation">(</span><span class="token function">multiply</span><span class="token punctuation">(</span>flockB<span class="token punctuation">,</span> flockA<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">multiply</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockB<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">// &#x518D;&#x5E94;&#x7528;&#x5206;&#x914D;&#x5F8B;</span>
+<span class="token function">multiply</span><span class="token punctuation">(</span>flockB<span class="token punctuation">,</span> <span class="token function">add</span><span class="token punctuation">(</span>flockA<span class="token punctuation">,</span> flockA<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><blockquote>
+<h2>&#x666E;&#x901A;&#x516C;&#x6C11;&#x7684;&#x51FD;&#x6570;</h2>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x8BF4;&#x51FD;&#x6570;&#x662F;&#x201C;&#x4E00;&#x7B49;&#x516C;&#x6C11;&#x201D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x5B9E;&#x9645;&#x4E0A;&#x8BF4;&#x7684;&#x662F;&#x5B83;&#x4EEC;&#x548C;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x90FD;&#x4E00;&#x6837;...&#x6240;&#x4EE5;&#x5C31;&#x662F;&#x666E;&#x901A;&#x516C;&#x6C11;&#xFF08;&#x5750;&#x7ECF;&#x6D4E;&#x8231;&#x7684;&#x4EBA;&#xFF1F;&#xFF09;&#x3002;JS &#x4E2D;&#x51FD;&#x6570;&#x771F;&#x6CA1;&#x4EC0;&#x4E48;&#x7279;&#x6B8A;&#x7684;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x50CF;&#x5BF9;&#x5F85;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E00;&#x6837;&#x5BF9;&#x5F85;&#x5B83;&#x4EEC;&#x2014;&#x2014;&#x628A;&#x5B83;&#x4EEC;&#x5B58;&#x5728;&#x6570;&#x7EC4;&#x91CC;&#xFF0C;&#x5F53;&#x4F5C;&#x53C2;&#x6570;&#x4F20;&#x9012;&#xFF0C;&#x8D4B;&#x503C;&#x7ED9;&#x53D8;&#x91CF;...&#x7B49;&#x7B49;&#x3002;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">hi</span> <span class="token operator">=</span> <span class="token parameter">name</span> <span class="token operator">=&gt;</span> <span class="token template-string"><span class="token string">`Hi </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span>
+<span class="token keyword">const</span> <span class="token function-variable function">greeting</span> <span class="token operator">=</span> <span class="token parameter">name</span> <span class="token operator">=&gt;</span> <span class="token function">hi</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+
+<span class="token function">hi</span><span class="token punctuation">(</span><span class="token string">&apos;there&apos;</span><span class="token punctuation">)</span> <span class="token comment">// &apos;Hi there&apos;</span>
+<span class="token function">greeting</span><span class="token punctuation">(</span><span class="token string">&apos;there&apos;</span><span class="token punctuation">)</span> <span class="token comment">// &apos;Hi there&apos;</span>
+</pre><p>&#x8FD9;&#x91CC; greeting &#x6307;&#x5411;&#x7684;&#x90A3;&#x4E2A;&#x628A; hi &#x5305;&#x4E86;&#x4E00;&#x5C42;&#x7684;&#x5305;&#x88F9;&#x51FD;&#x6570;&#x5B8C;&#x5168;&#x662F;&#x591A;&#x4F59;&#x7684;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> greeting <span class="token operator">=</span> hi
+</pre><p>&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;hi &#x5DF2;&#x7ECF;&#x662F;&#x4E2A;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#x4E86;&#xFF0C;&#x4E3A;&#x4F55;&#x8981;&#x518D;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x5305;&#x88F9;&#x51FD;&#x6570;&#xFF0C;&#x800C;&#x5B83;&#x4EC5;&#x4EC5;&#x662F;&#x7528;&#x8FD9;&#x4E2A;&#x76F8;&#x540C;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528; hi&#xFF1F;&#x5B8C;&#x5168;&#x6CA1;&#x6709;&#x9053;&#x7406;&#x3002;&#x8FD9;&#x5C31;&#x50CF;&#x5728;&#x5927;&#x590F;&#x5929;&#x91CC;&#x7A7F;&#x4E0A;&#x4F60;&#x6700;&#x539A;&#x7684;&#x5927;&#x8863;&#xFF0C;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x8DDF;&#x70ED;&#x7A7A;&#x6C14;&#x8FC7;&#x4E0D;&#x53BB;&#xFF0C;&#x7136;&#x540E;&#x5403;&#x4E0A;&#x4E2A;&#x51B0;&#x68CD;&#x3002;&#x771F;&#x662F;&#x8131;&#x88E4;&#x5B50;&#x653E;&#x5C41;&#x591A;&#x6B64;&#x4E00;&#x4E3E;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x51E0;&#x4E2A;&#x4F8B;&#x5B50;&#x3002;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x90FD;&#x6765;&#x81EA; npm &#x4E0A;&#x7684;&#x6A21;&#x5757;&#x5305;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// &#x592A;&#x50BB;&#x4E86;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getServerStuff</span> <span class="token operator">=</span> <span class="token parameter">callback</span> <span class="token operator">=&gt;</span> <span class="token function">ajaxCall</span><span class="token punctuation">(</span><span class="token parameter">json</span> <span class="token operator">=&gt;</span> <span class="token function">callback</span><span class="token punctuation">(</span>json<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x8FD9;&#x624D;&#x50CF;&#x6837;</span>
+<span class="token keyword">const</span> getServerStuff <span class="token operator">=</span> ajaxCall<span class="token punctuation">;</span>
+</pre><p>&#x4E16;&#x754C;&#x4E0A;&#x5230;&#x5904;&#x90FD;&#x5145;&#x65A5;&#x7740;&#x8FD9;&#x6837;&#x7684;&#x5783;&#x573E; ajax &#x4EE3;&#x7801;&#x3002;&#x4EE5;&#x4E0B;&#x662F;&#x4E0A;&#x8FF0;&#x4E24;&#x79CD;&#x5199;&#x6CD5;&#x7B49;&#x4EF7;&#x7684;&#x539F;&#x56E0;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// &#x8FD9;&#x884C;</span>
+<span class="token function">ajaxCall</span><span class="token punctuation">(</span><span class="token parameter">json</span> <span class="token operator">=&gt;</span> <span class="token function">callback</span><span class="token punctuation">(</span>json<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x7B49;&#x4EF7;&#x4E8E;&#x8FD9;&#x884C;</span>
+<span class="token function">ajaxCall</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x90A3;&#x4E48;&#xFF0C;&#x91CD;&#x6784;&#x4E0B; getServerStuff</span>
+<span class="token keyword">const</span> <span class="token function-variable function">getServerStuff</span> <span class="token operator">=</span> <span class="token parameter">callback</span> <span class="token operator">=&gt;</span> <span class="token function">ajaxCall</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ...&#x5C31;&#x7B49;&#x4E8E;</span>
+<span class="token keyword">const</span> getServerStuff <span class="token operator">=</span> ajaxCall <span class="token comment">// &lt;-- &#x770B;&#xFF0C;&#x6CA1;&#x6709;&#x62EC;&#x53F7;&#x54E6;</span>
+</pre><p>&#x9879;&#x76EE;&#x4E2D;&#x5E38;&#x89C1;&#x7684;&#x4E00;&#x79CD;&#x9020;&#x6210;&#x6DF7;&#x6DC6;&#x7684;&#x539F;&#x56E0;&#x662F;&#xFF0C;&#x9488;&#x5BF9;&#x540C;&#x4E00;&#x4E2A;&#x6982;&#x5FF5;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x547D;&#x540D;&#x3002;&#x8FD8;&#x6709;&#x901A;&#x7528;&#x4EE3;&#x7801;&#x7684;&#x95EE;&#x9898;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x4E0B;&#x9762;&#x8FD9;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x4E00;&#x6A21;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x540E;&#x4E00;&#x4E2A;&#x5C31;&#x663E;&#x5F97;&#x66F4;&#x52A0;&#x901A;&#x7528;&#xFF0C;&#x53EF;&#x91CD;&#x7528;&#x6027;&#x4E5F;&#x66F4;&#x9AD8;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// &#x53EA;&#x9488;&#x5BF9;&#x5F53;&#x524D;&#x7684;&#x535A;&#x5BA2;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">validArticles</span> <span class="token operator">=</span> <span class="token parameter">articles</span> <span class="token operator">=&gt;</span>
+  articles<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">article</span> <span class="token operator">=&gt;</span> article <span class="token operator">!==</span> <span class="token keyword">null</span> <span class="token operator">&gt;</span> <span class="token operator">&amp;&amp;</span> article <span class="token operator">!==</span> undefined<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x5BF9;&#x672A;&#x6765;&#x7684;&#x9879;&#x76EE;&#x66F4;&#x53CB;&#x597D;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">compact</span> <span class="token operator">=</span> <span class="token parameter">xs</span> <span class="token operator">=&gt;</span> xs<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=&gt;</span> x <span class="token operator">!==</span> <span class="token operator">&gt;</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> x <span class="token operator">!==</span> undefined<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>&#x5728;&#x547D;&#x540D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x7279;&#x522B;&#x5BB9;&#x6613;&#x628A;&#x81EA;&#x5DF1;&#x9650;&#x5B9A;&#x5728;&#x7279;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x4E0A;&#xFF08;&#x672C;&#x4F8B;&#x4E2D;&#x662F; articles&#xFF09;&#x3002;</p>
+<p>&#x6709;&#x4E00;&#x70B9;&#x6211;&#x5FC5;&#x987B;&#x5F97;&#x6307;&#x51FA;&#xFF0C;&#x4F60;&#x4E00;&#x5B9A;&#x8981;&#x975E;&#x5E38;&#x5C0F;&#x5FC3; this &#x503C;&#xFF0C;&#x522B;&#x8BA9;&#x5B83;&#x53CD;&#x54AC;&#x4F60;&#x4E00;&#x53E3;&#xFF0C;&#x8FD9;&#x4E00;&#x70B9;&#x4E0E;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x4EE3;&#x7801;&#x7C7B;&#x4F3C;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x5E95;&#x5C42;&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x4E86; this&#xFF0C;&#x800C;&#x4E14;&#x662F;&#x4EE5;&#x4E00;&#x7B49;&#x516C;&#x6C11;&#x7684;&#x65B9;&#x5F0F;&#x88AB;&#x8C03;&#x7528;&#x7684;&#xFF0C;&#x90A3;&#x4F60;&#x5C31;&#x7B49;&#x7740; JS &#x8FD9;&#x4E2A;&#x8E69;&#x811A;&#x7684;&#x62BD;&#x8C61;&#x6982;&#x5FF5;&#x53D1;&#x6012;&#x5427;&#x3002;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x592A;&#x53EF;&#x6015;&#x4E86;</span>
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">&apos;freaky_friday.txt&apos;</span><span class="token punctuation">,</span> Db<span class="token punctuation">.</span>save<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// &#x597D;&#x4E00;&#x70B9;&#x70B9;</span>
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">&apos;freaky_friday.txt&apos;</span><span class="token punctuation">,</span> Db<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>Db<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p>&#x628A; Db &#x7ED1;&#x5B9A;&#xFF08;bind&#xFF09;&#x5230;&#x5B83;&#x81EA;&#x5DF1;&#x8EAB;&#x4E0A;&#x4EE5;&#x540E;&#xFF0C;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x968F;&#x5FC3;&#x6240;&#x6B32;&#x5730;&#x8C03;&#x7528;&#x5B83;&#x7684;&#x539F;&#x578B;&#x94FE;&#x5F0F;&#x5783;&#x573E;&#x4EE3;&#x7801;&#x4E86;&#x3002;this &#x5C31;&#x50CF;&#x4E00;&#x5757;&#x810F;&#x5C3F;&#x5E03;&#xFF0C;&#x6211;&#x5C3D;&#x53EF;&#x80FD;&#x5730;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x4E2D;&#x6839;&#x672C;&#x7528;&#x4E0D;&#x5230;&#x5B83;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x7684;&#x7C7B;&#x5E93;&#x65F6;&#xFF0C;&#x4F60;&#x5374;&#x4E0D;&#x5F97;&#x4E0D;&#x5411;&#x8FD9;&#x4E2A;&#x75AF;&#x72C2;&#x7684;&#x4E16;&#x754C;&#x4F4E;&#x5934;&#x3002;</p>
+<p>&#x4E5F;&#x6709;&#x4EBA;&#x53CD;&#x9A73;&#x8BF4; this &#x80FD;&#x63D0;&#x9AD8;&#x6267;&#x884C;&#x901F;&#x5EA6;&#x3002;&#x5982;&#x679C;&#x4F60;&#x662F;&#x8FD9;&#x79CD;&#x5BF9;&#x901F;&#x5EA6;&#x5439;&#x6BDB;&#x6C42;&#x75B5;&#x7684;&#x4EBA;&#xFF0C;&#x90A3;&#x4F60;&#x8FD8;&#x662F;&#x5408;&#x4E0A;&#x8FD9;&#x672C;&#x4E66;&#x5427;&#x3002;&#x8981;&#x662F;&#x6CA1;&#x6CD5;&#x9000;&#x8D27;&#x9000;&#x6B3E;&#xFF0C;&#x4E5F;&#x8BB8;&#x4F60;&#x53EF;&#x4EE5;&#x53BB;&#x6362;&#x4E00;&#x672C;&#x66F4;&#x5165;&#x95E8;&#x7684;&#x4E66;&#x6765;&#x8BFB;&#x3002;</p>
+<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x624D;&#x51C6;&#x5907;&#x597D;&#x7EE7;&#x7EED;&#x540E;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x3002;</p>
+</blockquote>
+<h2 class="mume-header" id="%E7%BA%AF%E5%87%BD%E6%95%B0">&#x7EAF;&#x51FD;&#x6570;</h2>
+
+<blockquote>
+<p>&#x7EAF;&#x51FD;&#x6570;&#x662F;&#x8FD9;&#x6837;&#x4E00;&#x79CD;&#x51FD;&#x6570;&#xFF0C;&#x5373;<code>&#x76F8;&#x540C;&#x7684;&#x8F93;&#x5165;&#xFF0C;&#x6C38;&#x8FDC;&#x4F1A;&#x5F97;&#x5230;&#x76F8;&#x540C;&#x7684;&#x8F93;&#x51FA;</code>&#xFF0C;&#x800C;&#x4E14;<code>&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x53EF;&#x89C2;&#x5BDF;&#x7684;&#x526F;&#x4F5C;&#x7528;</code>&#x3002;</p>
+</blockquote>
+<p>&#x7EAF;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x6570;&#x5B66;&#x4E0A;&#x7684;&#x51FD;&#x6570;</p>
+<p>&#x6211;&#x4EEC;&#x8BF4; slice &#x7B26;&#x5408;&#x7EAF;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x662F;&#x56E0;&#x4E3A;&#x5BF9;&#x76F8;&#x540C;&#x7684;&#x8F93;&#x5165;&#x5B83;&#x4FDD;&#x8BC1;&#x80FD;&#x8FD4;&#x56DE;&#x76F8;&#x540C;&#x7684;&#x8F93;&#x51FA;&#x3002;&#x800C; splice &#x5374;&#x4F1A;&#x56BC;&#x70C2;&#x8C03;&#x7528;&#x5B83;&#x7684;&#x90A3;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5410;&#x51FA;&#x6765;&#xFF1B;&#x8FD9;&#x5C31;&#x4F1A;&#x4EA7;&#x751F;&#x53EF;&#x89C2;&#x5BDF;&#x5230;&#x7684;&#x526F;&#x4F5C;&#x7528;&#xFF0C;&#x5373;&#x8FD9;&#x4E2A;&#x6570;&#x7EC4;&#x6C38;&#x4E45;&#x5730;&#x6539;&#x53D8;&#x4E86;&#x3002;</p>
+<p>&quot;immutable&quot;</p>
+<blockquote>
+<p>&#x526F;&#x4F5C;&#x7528;&#x662F;&#x5728;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x7CFB;&#x7EDF;&#x72B6;&#x6001;&#x7684;&#x4E00;&#x79CD;&#x53D8;&#x5316;&#xFF0C;&#x6216;&#x8005;&#x4E0E;&#x5916;&#x90E8;&#x4E16;&#x754C;&#x8FDB;&#x884C;&#x7684;&#x53EF;&#x89C2;&#x5BDF;&#x7684;&#x4EA4;&#x4E92;&#x3002;</p>
+</blockquote>
+<p>&#x526F;&#x4F5C;&#x7528;&#x53EF;&#x80FD;&#x5305;&#x542B;&#xFF0C;&#x4F46;&#x4E0D;&#x9650;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x66F4;&#x6539;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</li>
+<li>&#x5F80;&#x6570;&#x636E;&#x5E93;&#x63D2;&#x5165;&#x8BB0;&#x5F55;</li>
+<li>&#x53D1;&#x9001;&#x4E00;&#x4E2A; http &#x8BF7;&#x6C42;</li>
+<li>&#x53EF;&#x53D8;&#x6570;&#x636E;</li>
+<li>&#x6253;&#x5370;/log</li>
+<li>&#x83B7;&#x53D6;&#x7528;&#x6237;&#x8F93;&#x5165;</li>
+<li>DOM &#x67E5;&#x8BE2;</li>
+<li>&#x8BBF;&#x95EE;&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</li>
+</ul>
+<p>&#x8FD9;&#x5E76;&#x4E0D;&#x662F;&#x8BF4;&#xFF0C;&#x8981;&#x7981;&#x6B62;&#x4F7F;&#x7528;&#x4E00;&#x5207;&#x526F;&#x4F5C;&#x7528;&#xFF0C;&#x800C;&#x662F;&#x8BF4;&#xFF0C;&#x8981;&#x8BA9;&#x5B83;&#x4EEC;&#x5728;&#x53EF;&#x63A7;&#x7684;&#x8303;&#x56F4;&#x5185;&#x53D1;&#x751F;&#x3002;&#x5982;&#x4F55;&#x63A7;&#x5236;&#x5B83;&#x4EEC;&#xFF1A;<code>functor</code> &#x548C; <code>monad</code></p>
+<h2 class="mume-header" id="%E6%9F%AF%E9%87%8C%E5%8C%96curry">&#x67EF;&#x91CC;&#x5316;&#xFF08;curry&#xFF09;</h2>
+
+<blockquote>
+<p>&#x53EA;&#x4F20;&#x9012;&#x7ED9;&#x51FD;&#x6570;&#x4E00;&#x90E8;&#x5206;&#x53C2;&#x6570;&#x6765;&#x8C03;&#x7528;&#x5B83;&#xFF0C;&#x8BA9;&#x5B83;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x53BB;&#x5904;&#x7406;&#x5269;&#x4E0B;&#x7684;&#x53C2;&#x6570;&#x3002;</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">add</span> <span class="token operator">=</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token parameter">y</span> <span class="token operator">=&gt;</span> x <span class="token operator">+</span> y
+</pre><p>&#x8FD9;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x67EF;&#x91CC;&#x5316;&#x7684; +&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x6700;&#x540E;&#x518D;&#x8BF4;</p>
+<p>&#x66F4;&#x52A0;&#x901A;&#x7528;&#x7684;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<p>&#x7528; bind &#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x7684;&#x5B9E;&#x73B0;</p>
+<blockquote>
+<p>MDN&#xFF1A;bind()&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5728;bind()&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B0;&#x51FD;&#x6570;&#x7684;this&#x88AB;bind&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#xFF0C;&#x5176;&#x4F59;&#x7684;&#x53C2;&#x6570;&#x5C06;&#x4F5C;&#x4E3A;&#x65B0;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x4F9B;&#x8C03;&#x7528;&#x65F6;&#x4F7F;&#x7528;&#x3002;</p>
+</blockquote>
+<p>&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x4E2D;&#x4E0D;&#x7528; this&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x5173;&#x4E8E; this &#x7684;&#x90E8;&#x5206;&#x5FFD;&#x7565;&#xFF1A;</p>
+<p>bind &#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5728; bind &#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;<s>&#x9664;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x4EE5;&#x5916;&#x7684;</s>&#x53C2;&#x6570;&#x5C06;&#x4F5C;&#x4E3A;&#x65B0;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x4F9B;&#x8C03;&#x7528;&#x65F6;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x55EF;&#xFF0C;&#x6709;&#x67EF;&#x91CC;&#x5316;&#x5185;&#x5473;</p>
+<p><img src="./bind.png" alt="bind"></p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// curry :: ((a, b, ...) -&gt; c) -&gt; a -&gt; b -&gt; ... -&gt; c</span>
+<span class="token keyword">function</span> <span class="token function">curry</span><span class="token punctuation">(</span><span class="token parameter">fn</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> arity <span class="token operator">=</span> fn<span class="token punctuation">.</span>length
+
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">$curry</span><span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> arity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token function">$curry</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">curry</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> arity <span class="token operator">=</span> fn<span class="token punctuation">.</span>length<span class="token punctuation">,</span> <span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+  arity <span class="token operator">&lt;=</span> args<span class="token punctuation">.</span>length <span class="token operator">?</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token function">curry</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> fn<span class="token punctuation">,</span> arity<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token punctuation">)</span>
+</pre><h2 class="mume-header" id="%E7%BB%84%E5%90%88compose">&#x7EC4;&#x5408;&#xFF08;compose&#xFF09;</h2>
+
+<p>&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x7EC4;&#x5408;&#x51FA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x51FD;&#x6570;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">simpleCompose</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">f<span class="token punctuation">,</span> g</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token function">g</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>&#x5728; compose &#x7684;&#x5B9A;&#x4E49;&#x4E2D;&#xFF0C;g &#x5C06;&#x5148;&#x4E8E; f &#x6267;&#x884C;&#xFF0C;&#x56E0;&#x6B64;&#x5C31;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;<code>&#x4ECE;&#x53F3;&#x5230;&#x5DE6;</code>&#x7684;&#x6570;&#x636E;&#x6D41;&#x3002;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">compose</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>fns</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> fns<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">f<span class="token punctuation">,</span> g</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token operator">...</span>args</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token function">g</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>&#x4ECE;&#x53F3;&#x5411;&#x5DE6;&#x6267;&#x884C;&#x66F4;&#x52A0;&#x80FD;&#x591F;&#x53CD;&#x6620;&#x6570;&#x5B66;&#x4E0A;&#x7684;&#x542B;&#x4E49;&#x2014;&#x2014;&#x7EC4;&#x5408;&#x7684;&#x6982;&#x5FF5;&#x76F4;&#x63A5;&#x6765;&#x81EA;&#x4E8E;&#x6570;&#x5B66;&#x8BFE;&#x672C;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x7EC4;&#x5408;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x6027;&#xFF1A;</p>
+<p>&#x7ED3;&#x5408;&#x5F8B;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// associativity</span>
+<span class="token function">compose</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> <span class="token function">compose</span><span class="token punctuation">(</span>g<span class="token punctuation">,</span> h<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token function">compose</span><span class="token punctuation">(</span><span class="token function">compose</span><span class="token punctuation">(</span>f<span class="token punctuation">,</span> g<span class="token punctuation">)</span><span class="token punctuation">,</span> h<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><p><img src="./composition.png" alt="composition"></p>
+<p>&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">toUpperCase</span> <span class="token operator">=</span> <span class="token parameter">s</span> <span class="token operator">=&gt;</span> s<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">exclaim</span> <span class="token operator">=</span> <span class="token parameter">s</span> <span class="token operator">=&gt;</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>s<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!`</span></span>
+<span class="token keyword">const</span> shout <span class="token operator">=</span> <span class="token function">compose</span><span class="token punctuation">(</span>exclaim<span class="token punctuation">,</span> toUpperCase<span class="token punctuation">)</span>
+
+<span class="token function">shout</span><span class="token punctuation">(</span><span class="token string">&apos;awesome&apos;</span><span class="token punctuation">)</span> <span class="token comment">// AWESOME!</span>
+</pre><h2 class="mume-header" id="pointfree">pointfree</h2>
+
+<blockquote>
+<p>&#x4E0D;&#x4F7F;&#x7528;&#x6240;&#x8981;&#x5904;&#x7406;&#x7684;&#x503C;&#xFF0C;&#x53EA;&#x5408;&#x6210;&#x8FD0;&#x7B97;&#x8FC7;&#x7A0B;</p>
+</blockquote>
+<blockquote>
+<p>&#x51FD;&#x6570;&#x65E0;&#x987B;&#x63D0;&#x53CA;&#x5C06;&#x8981;&#x64CD;&#x4F5C;&#x7684;&#x6570;&#x636E;&#x662F;&#x4EC0;&#x4E48;&#x6837;&#x7684;</p>
+</blockquote>
+<p>&#x975E; pointfree &#x7684; shout&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">shout</span> <span class="token operator">=</span> <span class="token parameter">s</span> <span class="token operator">=&gt;</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>s<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!`</span></span>
+</pre><blockquote>
+<p>Pointfree &#x7684;&#x672C;&#x8D28;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x901A;&#x7528;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x7EC4;&#x5408;&#x51FA;&#x5404;&#x79CD;&#x590D;&#x6742;&#x8FD0;&#x7B97;&#x3002;&#x4E0A;&#x5C42;&#x8FD0;&#x7B97;&#x4E0D;&#x8981;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#xFF0C;&#x800C;&#x662F;&#x901A;&#x8FC7;&#x5E95;&#x5C42;&#x51FD;&#x6570;&#x53BB;&#x5904;&#x7406;&#x3002;&#x8FD9;&#x5C31;&#x8981;&#x6C42;&#xFF0C;&#x5C06;&#x4E00;&#x4E9B;&#x5E38;&#x7528;&#x7684;&#x64CD;&#x4F5C;&#x5C01;&#x88C5;&#x6210;&#x51FD;&#x6570;&#x3002;</p>
+</blockquote>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">add</span> <span class="token operator">=</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token parameter">y</span> <span class="token operator">=&gt;</span> x <span class="token operator">+</span> y
+<span class="token keyword">const</span> <span class="token function-variable function">multiply</span> <span class="token operator">=</span> <span class="token parameter">x</span> <span class="token operator">=&gt;</span> <span class="token parameter">y</span> <span class="token operator">=&gt;</span> x <span class="token operator">*</span> y
+<span class="token keyword">const</span> <span class="token function-variable function">prop</span> <span class="token operator">=</span> <span class="token parameter">p</span> <span class="token operator">=&gt;</span> <span class="token parameter">obj</span> <span class="token operator">=&gt;</span> obj<span class="token punctuation">[</span>p<span class="token punctuation">]</span>
+<span class="token keyword">const</span> <span class="token function-variable function">last</span> <span class="token operator">=</span> <span class="token parameter">xs</span> <span class="token operator">=&gt;</span> xs<span class="token punctuation">[</span>xs<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">map</span> <span class="token operator">=</span> <span class="token parameter">fn</span> <span class="token operator">=&gt;</span> <span class="token parameter">xs</span> <span class="token operator">=&gt;</span> xs<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>fn<span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">reduce</span> <span class="token operator">=</span> <span class="token parameter">fn</span> <span class="token operator">=&gt;</span> <span class="token parameter">head</span> <span class="token operator">=&gt;</span> <span class="token parameter">xs</span> <span class="token operator">=&gt;</span> xs<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span>fn<span class="token punctuation">,</span> head<span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">sortBy</span> <span class="token operator">=</span> <span class="token parameter">fn</span> <span class="token operator">=&gt;</span> <span class="token parameter">xs</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span><span class="token operator">...</span>xs<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">fn</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">fn</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// immutable</span>
+<span class="token keyword">const</span> concat <span class="token operator">=</span> <span class="token function">curry</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> a<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> flip <span class="token operator">=</span> <span class="token function">curry</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">fn</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><p>&#x4F8B;&#x5B50;&#xFF1A;</p>
+<p>&#x7528; pointfree &#x7684;&#x65B9;&#x5F0F;&#x91CD;&#x6784;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> cars <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">&apos;Aston Martin One-77&apos;</span><span class="token punctuation">,</span>
+  horsepower<span class="token punctuation">:</span> <span class="token number">750</span><span class="token punctuation">,</span>
+  dollarValue<span class="token punctuation">:</span> <span class="token number">1850000</span><span class="token punctuation">,</span>
+  inStock<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">/* lots of cars */</span><span class="token punctuation">]</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">average</span> <span class="token operator">=</span> <span class="token parameter">arr</span> <span class="token operator">=&gt;</span> <span class="token function">reduce</span><span class="token punctuation">(</span>add<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span> <span class="token operator">/</span> arr<span class="token punctuation">.</span>length
+
+<span class="token keyword">const</span> <span class="token function-variable function">averageDollarValue</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">cars</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> dollarValues <span class="token operator">=</span> <span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">c</span> <span class="token operator">=&gt;</span> c<span class="token punctuation">.</span>dollarValue<span class="token punctuation">,</span> cars<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">average</span><span class="token punctuation">(</span>dollarValues<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// averageDollarValue :: [Car] -&gt; Int</span>
+<span class="token keyword">const</span> averageDollarValue <span class="token operator">=</span> <span class="token function">compose</span><span class="token punctuation">(</span>average<span class="token punctuation">,</span> <span class="token function">map</span><span class="token punctuation">(</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">&apos;dollarValue&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fastestCar</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">cars</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> sorted <span class="token operator">=</span> <span class="token function">sortBy</span><span class="token punctuation">(</span><span class="token parameter">car</span> <span class="token operator">=&gt;</span> car<span class="token punctuation">.</span>horsepower<span class="token punctuation">)</span><span class="token punctuation">(</span>cars<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> fastest <span class="token operator">=</span> <span class="token function">last</span><span class="token punctuation">(</span>sorted<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">concat</span><span class="token punctuation">(</span>fastest<span class="token punctuation">.</span>name<span class="token punctuation">,</span> <span class="token string">&apos; is the fastest&apos;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="js" class="language-javascript"><span class="token comment">// append :: String -&gt; String -&gt; String</span>
+<span class="token keyword">const</span> append <span class="token operator">=</span> <span class="token function">flip</span><span class="token punctuation">(</span>concat<span class="token punctuation">)</span>
+
+<span class="token comment">// fastestCar :: [Car] -&gt; String</span>
+<span class="token keyword">const</span> fastestCar <span class="token operator">=</span> <span class="token function">compose</span><span class="token punctuation">(</span>
+  <span class="token function">append</span><span class="token punctuation">(</span><span class="token string">&apos; is the fastest&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">&apos;name&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  last<span class="token punctuation">,</span>
+  <span class="token function">sortBy</span><span class="token punctuation">(</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">&apos;horsepower&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</pre><h2 class="mume-header" id="more-fp">more FP</h2>
+
+<p><img src="./yyx.png" alt="yyx"></p>
+<p>JS &#x53EA;&#x80FD;&#x6A21;&#x62DF; FP&#xFF0C;&#x5C31;&#x50CF;&#x6A21;&#x62DF;&#x57FA;&#x4E8E;&#x7C7B;&#x7684; OO &#x4E00;&#x6837;</p>
+<blockquote>
+<ul>
+<li>
+<p><code>Functions as first-class values: &#x51FD;&#x6570;&#x4E00;&#x7B49;&#x516C;&#x6C11;</code>, &#x53EF;&#x4EE5;&#x628A;&#x51FD;&#x6570;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x9012;, &#x4ECE;&#x800C;&#x6784;&#x9020;&#x51FA;&#x9AD8;&#x9636;&#x51FD;&#x6570;&#x5404;&#x79CD;&#x7528;&#x6CD5;. &#x8FD9;&#x4E2A;&#x7528;&#x6CD5;&#x5404;&#x79CD;&#x8BED;&#x8A00;&#x90FD;&#x652F;&#x6301;&#x4E86;: Lua &#x652F;&#x6301;, Python &#x4F3C;&#x4E4E;&#x4E5F;&#x652F;&#x6301;, Java &#x4E5F;&#x5F00;&#x59CB;&#x652F;&#x6301;&#x4E86;, &#x6211;&#x4F1A;&#x7684;&#x8BED;&#x8A00;&#x5C11;&#x90FD;&#x4E3E;&#x4E0D;&#x51FA;&#x6765;&#x4E0D;&#x652F;&#x6301;&#x4F20;&#x51FD;&#x6570;&#x7684;&#x6D41;&#x884C;&#x8BED;&#x8A00;.</p>
+</li>
+<li>
+<p><code>Pure functions, &#x7EAF;&#x51FD;&#x6570;.</code> &#x53EF;&#x4EE5;&#x5199;, &#x4F46;&#x4E5F;&#x6709;&#x5F88;&#x5927;&#x533A;&#x522B;. JavaScript &#x6CA1;&#x9650;&#x5236;, &#x4ECE;&#x800C;&#x4E0D;&#x80FD;&#x9884;&#x5224;&#x51FD;&#x6570;&#x7EAF;&#x6216;&#x8005;&#x4E0D;&#x7EAF;. Clojure &#x9075;&#x5FAA; Lisp &#x98CE;&#x683C;&#x7684;&#x7EA6;&#x5B9A;, &#x5E26;&#x526F;&#x4F5C;&#x7528;&#x7684;&#x51FD;&#x6570;&#x4E00;&#x822C;&#x7528; f! &#x8FD9;&#x79CD;&#x53F9;&#x53F7;&#x7ED3;&#x5C3E;&#x7684;&#x5199;&#x6CD5;&#x547D;&#x540D;, &#x800C;&#x7F16;&#x8BD1;&#x5668;&#x6CA1;&#x6709;&#x7EA6;&#x675F;. Haskell &#x662F;&#x4E25;&#x683C;&#x7EA6;&#x675F;&#x7684;, &#x51FA;&#x4E86;&#x540D;&#x7684; IO Monad &#x5C31;&#x662F;&#x56E0;&#x4E3A;&#x9075;&#x5FAA;&#x7EAF;&#x51FD;&#x6570;&#x5BFC;&#x81F4;&#x526F;&#x4F5C;&#x7528;&#x96BE;&#x4EE5;&#x76F4;&#x63A5;&#x7528;&#x6570;&#x5B66;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x51FA;&#x6765;, &#x6700;&#x7EC8;&#x7CBE;&#x5FC3;&#x8BBE;&#x8BA1;&#x51FA;&#x4E00;&#x4E2A;&#x6982;&#x5FF5;.</p>
+</li>
+<li>
+<p><code>Referential transparency, &#x5F15;&#x7528;&#x900F;&#x660E;</code>, &#x6240;&#x4EE5;&#x8868;&#x8FBE;&#x5F0F;&#x53EF;&#x4EE5;&#x88AB;&#x5176;&#x8FD0;&#x7B97;&#x7ED3;&#x679C;&#x5B8C;&#x5168;&#x66FF;&#x6362;&#x6389;, &#x4E5F;&#x5C31;&#x662F;&#x8981;&#x6C42;&#x63A7;&#x5236;&#x751A;&#x81F3;&#x907F;&#x514D;&#x526F;&#x4F5C;&#x7528;.</p>
+</li>
+<li>
+<p><code>Controlled effects, &#x53D7;&#x63A7;&#x7684;&#x526F;&#x4F5C;&#x7528;</code>, &#x4E3B;&#x8981;&#x624B;&#x6BB5;&#x662F;&#x9694;&#x79BB;. JavaScript &#x9700;&#x8981;&#x4EBA;&#x4E3A;&#x5730;&#x53BB;&#x9694;&#x79BB;, &#x8BED;&#x8A00;&#x5C42;&#x9762;&#x5B8C;&#x5168;&#x6CA1;&#x6709;&#x9650;&#x5236;. Clojure &#x4E5F;&#x9700;&#x8981;&#x4EBA;&#x4E3A;&#x9694;&#x79BB;, &#x5C31;&#x50CF;&#x524D;&#x9762;&#x8BF4;&#x7684; f! &#x90A3;&#x6837;&#x7684;&#x7EA6;&#x5B9A;, &#x540C;&#x65F6;&#x89C4;&#x5B9A;&#x4E86;&#x6570;&#x636E;&#x4E0D;&#x53EF;&#x53D8;, &#x518D;&#x52A0;&#x4E0A;&#x4F5C;&#x8005;&#x6709;&#x610F;&#x5728;&#x8BED;&#x8A00;&#x4E2D;&#x5F3A;&#x8C03;&#x63A7;&#x5236;&#x526F;&#x4F5C;&#x7528;, &#x5B9E;&#x9645;&#x4E0A;&#x526F;&#x4F5C;&#x7528;&#x5C11;&#x5F97;&#x591A;. Haskell &#x901A;&#x8FC7;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;&#x9650;&#x5B9A;, &#x4E0D;&#x9694;&#x79BB;&#x526F;&#x4F5C;&#x7528;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x7F16;&#x8BD1;&#x7684;.</p>
+</li>
+<li>
+<p><code>Everything is an expression, &#x4E00;&#x5207;&#x7686;&#x662F;&#x8868;&#x8FBE;&#x5F0F;.</code> JavaScript &#x505A;&#x4E0D;&#x5230;, &#x5BFC;&#x81F4;&#x8BBE;&#x8BA1; DSL &#x65F6;&#x5019;&#x5F88;&#x5934;&#x75BC;, &#x5012;&#x662F; CoffeeScript &#x505A;&#x5230;&#x4E86;. Clojure &#x7EE7;&#x627F;&#x4E86; Lisp, &#x5F88;&#x660E;&#x663E;&#x4E00;&#x5207;&#x7686;&#x662F;&#x8868;&#x8FBE;&#x5F0F;. Haskell &#x4EE3;&#x7801;&#x91CC;&#x90FD;&#x662F;&#x51FD;&#x6570;, &#x9664;&#x4E86;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#x548C;&#x8BED;&#x6CD5;&#x7CD6;&#x90E8;&#x5206;, &#x4E5F;&#x662F;&#x4E00;&#x5207;&#x7686;&#x662F;&#x8868;&#x8FBE;&#x5F0F;.</p>
+</li>
+<li>
+<p><code>No loops, &#x6362;&#x53E5;&#x8BDD;&#x8BF4;, &#x4E0D;&#x80FD;&#x7528; for/while</code>, &#x56E0;&#x4E3A;&#x8FD9;&#x4E24;&#x4E2A;&#x5199;&#x6CD5;&#x5F53;&#x4E2D;&#x7684; i++ &#x4F9D;&#x8D56;&#x53EF;&#x53D8;&#x6570;&#x636E;. JavaScript &#x7ECF;&#x5E38;&#x4F7F;&#x7528; for/while. Clojure &#x5F53;&#x4E2D;&#x7684;&#x5FAA;&#x73AF;&#x57FA;&#x672C;&#x4E0A;&#x7528;&#x5C3E;&#x9012;&#x5F52;&#x5B9E;&#x73B0;, &#x540C;&#x65F6;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86; doseq &#x4E4B;&#x7C7B;&#x7684; Macro &#x8BA9;&#x5FAA;&#x73AF;&#x8FC7;&#x7A0B;&#x5F88;&#x597D;&#x5199;. Haskell &#x5C31;&#x662F;&#x5B8C;&#x5168;&#x5C3E;&#x9012;&#x5F52;&#x7684;&#x5199;&#x6CD5;&#x4E86;.</p>
+</li>
+<li>
+<p><code>Immutable values.</code> JavaScript &#x9ED8;&#x8BA4;&#x53EF;&#x53D8;, &#x4EC5;&#x6709;&#x7684;&#x624B;&#x6BB5;&#x7528; Object.freeze &#x53EF;&#x4EE5;&#x5F3A;&#x884C;&#x9501;&#x5B9A;&#x5BF9;&#x8C61;&#x6216;&#x8005; const &#x9501;&#x5B9A;&#x53D8;&#x91CF;&#x672C;&#x8EAB;, &#x53E6;&#x5916;&#x5C31;&#x662F; immutable-js &#x90A3;&#x6837;&#x7684;&#x5171;&#x4EAB;&#x7ED3;&#x6784;&#x7684;&#x4E0D;&#x53EF;&#x53D8;&#x6570;&#x636E;&#x4F5C;&#x4E3A;&#x7C7B;&#x5E93;&#x6765;&#x5B9E;&#x73B0;. Clojure &#x662F;&#x628A;&#x4E0D;&#x53EF;&#x53D8;&#x6570;&#x636E;&#x548C;&#x7ED3;&#x6784;&#x5171;&#x4EAB;&#x4F5C;&#x4E3A;&#x8BED;&#x8A00;&#x7684;&#x57FA;&#x7840;, &#x4E13;&#x95E8;&#x8BBE;&#x8BA1;&#x4E86; Atom &#x7C7B;&#x578B;&#x7528;&#x4E8E;&#x6A21;&#x62DF;&#x5171;&#x4EAB;&#x7684;&#x53EF;&#x53D8;&#x72B6;&#x6001;, &#x4E5F;&#x4E0D;&#x6392;&#x9664;&#x67D0;&#x4E9B;&#x573A;&#x666F;&#x548C;&#x5BBF;&#x4E3B;&#x8BED;&#x8A00;&#x7684;&#x4E92;&#x64CD;&#x4F5C;&#x8FD8;&#x662F;&#x4F1A;&#x6709;&#x53EF;&#x53D8;&#x6570;&#x636E;. Haskell &#x9ED8;&#x8BA4;&#x5C31;&#x662F;&#x4E0D;&#x53EF;&#x53D8;&#x6570;&#x636E;, &#x4E5F;&#x6709; IORef &#x76F8;&#x5173;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x6A21;&#x62DF;&#x53EF;&#x53D8;&#x72B6;&#x6001;, &#x4F46;&#x5728;&#x6559;&#x7A0B;&#x91CC;&#x51E0;&#x4E4E;&#x770B;&#x4E0D;&#x5230;.</p>
+</li>
+<li>
+<p><code>Algebraic Datatypes, &#x4EE3;&#x6570;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;.</code> JavaScript &#x6CA1;&#x6709;&#x9759;&#x6001;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;, TypeScript &#x6709;&#x7C7B;&#x578B;, &#x4F46;&#x548C;&#x4EE3;&#x6570;&#x7C7B;&#x578B;&#x8FD8;&#x4E0D;&#x4E00;&#x6837;. Clojure &#x6CA1;&#x6709;&#x9759;&#x6001;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;, &#x5C31;&#x7B97;&#x6709;&#x800C;&#x53EA;&#x662F;&#x5F88;&#x57FA;&#x7840;&#x7684;&#x7C7B;&#x578B;&#x68C0;&#x67E5;, &#x6216;&#x8005;&#x7528; Specs &#x505A;&#x8BE6;&#x7EC6;&#x8FD0;&#x884C;&#x65F6;&#x68C0;&#x67E5;. Haskell &#x6709;&#x5F3A;&#x5927;&#x7684;&#x4EE3;&#x6570;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;, &#x5373;&#x4FBF;&#x662F;&#x526F;&#x4F5C;&#x7528;&#x4E5F;&#x88AB;&#x6DB5;&#x76D6;&#x5728;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;&#x5F53;&#x4E2D;.</p>
+</li>
+<li>
+<p><code>Product types.</code> Haskell <a href="http://xn--mnqw4sr0j08bijy39iwzaw4i083cyxa.No">&#x901A;&#x8FC7;&#x4EE3;&#x6570;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;&#x652F;&#x6301;.No</a> Null. JavaScript &#x5F53;&#x4E2D;&#x6709; undefined &#x548C; null. Clojure &#x5F53;&#x4E2D;&#x53EA;&#x6709; nil. Haskell &#x91CC;&#x6CA1;&#x6709; null &#x4E5F;&#x6CA1;&#x6709; nil, &#x800C;&#x662F;&#x7528;&#x4E86; Maybe Monad &#x8FD9;&#x6837;&#x7684;&#x6982;&#x5FF5;, &#x901A;&#x8FC7;&#x7C7B;&#x578B;&#x7CFB;&#x7EDF;&#x8FDB;&#x884C;&#x4E86;&#x62BD;&#x8C61;&#x548C;&#x9650;&#x5236;. null &#x7684;&#x95EE;&#x9898;&#x5F88;&#x6DF1;, &#x7F51;&#x4E0A;&#x627E;&#x89E3;&#x91CA;&#x5427;, &#x6211;&#x8FD8;&#x6CA1;&#x7406;&#x89E3;&#x6E05;&#x695A;, &#x53EA;&#x4E86;&#x89E3;&#x5230;&#x6EE1;&#x8DB3;&#x4E86;&#x65B9;&#x4FBF;&#x5374;&#x9020;&#x6210;&#x4E86;&#x610F;&#x6599;&#x4E4B;&#x5916;&#x7684;&#x590D;&#x6742;&#x5EA6;.</p>
+</li>
+<li>
+<p><code>A function always returns a value, &#x51FD;&#x6570;&#x6C38;&#x8FDC;&#x90FD;&#x6709;&#x8FD4;&#x56DE;&#x503C;</code>, &#x7C7B;&#x4F3C;&#x4E00;&#x5207;&#x7686;&#x662F;&#x8868;&#x8FBE;&#x5F0F;&#x90A3;&#x4E2A;&#x95EE;&#x9898;. &#x6BD4;&#x5982; Haskell &#x91CC;&#x4F1A;&#x6709;&#x7684;&#x53EB;&#x505A; Unit &#x7684; () &#x7A7A;&#x7684;&#x503C;. &#x8FD9;&#x4E2A;&#x6709;&#x70B9;&#x8D39;&#x89E3;...Currying, &#x67EF;&#x7406;&#x5316;. JavaScript &#x548C; Clojure &#x4E5F;&#x80FD;&#x6A21;&#x62DF;, &#x800C;&#x5728; Haskell &#x5F53;&#x4E2D;&#x662F;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;.</p>
+</li>
+<li>
+<p><code>Lexical scoping, &#x8BCD;&#x6CD5;&#x4F5C;&#x7528;&#x57DF;</code>. &#x4E09;&#x8005;&#x90FD;&#x652F;&#x6301;.</p>
+</li>
+<li>
+<p><code>Closures, &#x95ED;&#x5305;</code>, &#x90FD;&#x652F;&#x6301;.</p>
+</li>
+<li>
+<p><code>Pattern matching, &#x6A21;&#x5F0F;&#x5339;&#x914D;</code>. &#x7C7B;&#x4F3C;&#x89E3;&#x6784;&#x8D4B;&#x503C;&#x4E4B;&#x7C7B;&#x7684;&#x5728; JavaScript &#x548C; Clojure &#x5F53;&#x4E2D;&#x901A;&#x8FC7;&#x8BED;&#x6CD5;&#x7CD6;&#x4E5F;&#x7B97;&#x6709;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;, &#x4F46;&#x662F;&#x8DDF; Haskell &#x4EE5;&#x53CA; Elixir &#x5F53;&#x4E2D;&#x7684;&#x7528;&#x6CD5;&#x5BF9;&#x6BD4;&#x8D77;&#x6765;&#x5DEE;&#x8DDD;&#x5F88;&#x5927;. &#x6BD4;&#x5982;&#x8BF4; Haskell &#x751A;&#x81F3;&#x80FD;&#x5B9A;&#x4E49; let 1 + 1 = 3 &#x6765;&#x8986;&#x76D6; + &#x7684;&#x884C;&#x4E3A;, &#x867D;&#x7136;&#x662F;&#x5947;&#x8469;&#x7684;&#x73B0;&#x8C61;, &#x4F46;&#x8FD9;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x7684; pattern, &#x5728; JavaScript &#x548C; Clojure &#x90FD;&#x6CA1;&#x6709;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;.</p>
+</li>
+<li>
+<p><code>Lazy evaluation, &#x60F0;&#x6027;&#x8BA1;&#x7B97;</code>. JavaScript &#x662F;&#x4E25;&#x683C;&#x6C42;&#x503C;&#x7684;, &#x4E0D;&#x652F;&#x6301;&#x60F0;&#x6027;&#x8BA1;&#x7B97;. Clojure &#x652F;&#x6301; Lazy, &#x7136;&#x800C;&#x7531;&#x4E8E; Clojure &#x53C8;&#x5141;&#x8BB8;&#x4E86;&#x4E00;&#x4E9B;&#x526F;&#x4F5C;&#x7528;, &#x5B9E;&#x9645;&#x4E0A;&#x67D0;&#x4E9B;&#x7279;&#x6B8A;&#x573A;&#x666F;&#x4F1A;&#x9700;&#x8981;&#x624B;&#x52A8; force &#x4EE3;&#x7801;&#x6267;&#x884C;, &#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4E0D;&#x5B8C;&#x7F8E;. Haskell &#x91C7;&#x7528;&#x60F0;&#x6027;&#x8BA1;&#x7B97;. &#x60F0;&#x6027;&#x8BA1;&#x7B97;&#x5C31;&#x662F;&#x8BF4;&#x4EE3;&#x7801;&#x91CC;&#x7684;&#x8868;&#x8FBE;&#x5F0F;&#x88AB;&#x771F;&#x6B63;&#x4F7F;&#x7528;&#x6765;&#x624D;&#x4F1A;&#x771F;&#x6B63;&#x6267;&#x884C;, &#x5426;&#x5219;&#x5C31;&#x50CF;&#x662F;&#x4E2A; thunk, &#x7EE7;&#x7EED;&#x4EE5;&#x8868;&#x8FBE;&#x5F0F;&#x5B58;&#x50A8;&#x7740;. &#x6211;&#x5370;&#x8C61;&#x91CC; Elm &#x793E;&#x533A;&#x8BF4;&#x8FC7;, &#x5BF9;&#x4E8E;&#x56FE;&#x5F62;&#x754C;&#x9762;&#x6765;&#x8BF4; Lazy &#x53CD;&#x800C;&#x662F;&#x591A;&#x4F59;&#x7684;.</p>
+</li>
+</ul>
+</blockquote>
+<h2 class="mume-header" id="ref">ref:</h2>
+
+<p><a href="https://mostly-adequate.gitbooks.io/mostly-adequate-guide/content/">mostly-adequate-guide</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/24076438">&#x4E3A;&#x4EC0;&#x4E48;&#x8BF4; JavaScript &#x4E0D;&#x64C5;&#x957F;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;</a></p>
+<p><a href="https://github.com/stoeffel/awesome-fp-js">awesome-fp-js</a></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
