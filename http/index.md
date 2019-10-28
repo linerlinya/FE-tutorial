@@ -62,7 +62,109 @@ URI 是统一资源标识符，而 URL 是统一资源定位符，我们可以�
 
 ## 简单说下 HTTP
 
-<!-- TODO -->
+HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种网络传输协议，所有的WWW文件都必须遵守这个**标准**。
+
+### 方法
+
+* **GET：获取资源**
+
+* **POST：传输实体主体，主要目的是传输**
+
+* PUT：传输文件，保存到指定的位置
+
+* HEAD：获得报文首部
+
+* DELETE：删除文件
+
+* OPTIONS：查询支持的方法
+
+* TRACE：追踪路径
+
+* CONNECT：要求使用隧道协议连接代理
+
+### 常见状态码
+
+* 2XX 成功
+
+    * 200 OK：请求成功
+
+    * 204 No Content：请求处理成功，但没有资源可返回
+
+* 3XX 重定向
+
+    * 301 Moved Permanently：永久重定向
+
+    * 302 Found：临时重定向
+
+    * 304 Not Modified：服务端资源未改变，可使用缓存（和重定向无关）
+
+* 4XX 客户端错误
+
+    * 400 Bad Request：请求报文语法错误
+
+    * 401 Unauthorized：请求需认证
+
+    * 403 Forbidden：不允许访问资源
+
+    * 404 Not Found：服务器无请求资源
+
+* 5XX 服务器错误
+
+    * 500 Internal Server Error：服务器端在执行请求时发生错误
+
+    * 503 Service Unavaiable：服务器超负载
+
+### HTTP 报文
+
+![http-struct](./http-struct.jpg)
+
+GET 请求示例：
+
+```http
+GET /search?hl=zh-CN&source=hp&q=domety HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-silverlight, application/x-shockwave-flash, */*
+Referer: http://www.google.com/
+Accept-Language: zh-cn
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; TheWorld)
+Host: www.google.com
+Connection: Keep-Alive
+Cookie: PREF=ID=80a06da87be9ae3c:U=f7167333e2c3b714:NW=1:TM=1261551909:LM=1261551917:S=ybYcq2wpfefs4V9g;NID=31=ojj8d-IygaEtSxLgaJmqSjVhCspkviJrB6omjamNrSm8lZhKy_yMfO2M4QMRKcH1g0iQv9u-2hfBW7bUFwVh7pGaRUb0RnHcJU37y-FxlRugatx63JLv7CWMD6UB_O_r
+```
+
+POST 请求示例：
+
+```http
+POST /search HTTP/1.1  
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-silverlight, application/x-shockwave-flash, */*  
+Referer: http://www.google.com/
+Accept-Language: zh-cn  
+Accept-Encoding: gzip, deflate  
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; TheWorld)  
+Host: www.google.com
+Connection: Keep-Alive  
+Cookie: PREF=ID=80a06da87be9ae3c:U=f7167333e2c3b714:NW=1:TM=1261551909:LM=1261551917:S=ybYcq2wpfefs4V9g; NID=31=ojj8d-IygaEtSxLgaJmqSjVhCspkviJrB6omjamNrSm8lZhKy_yMfO2M4QMRKcH1g0iQv9u-2hfBW7bUFwVh7pGaRUb0RnHcJU37y-FxlRugatx63JLv7CWMD6UB_O_r  
+  
+hl=zh-CN&source=hp&q=domety  
+```
+
+响应示例：
+
+```http
+HTTP/1.1 200 OK
+Date: Sat, 31 Dec 2005 23:59:59 GMT
+Content-Type: text/html;charset=ISO-8859-1
+Content-Length: 122
+  
+＜html＞
+＜head＞
+＜title＞Wrox Homepage＜/title＞
+＜/head＞
+＜body＞
+＜!-- body goes here --＞
+＜/body＞
+＜/html＞
+```
 
 ## AJAX
 
@@ -440,7 +542,7 @@ request.send('name=ahab&age=18&single=true')
     <head>
       <script src="http://api.xxx.com?name=ahab&callback=show"></script>
       <!--
-      上面那行等同于这样
+      上面那行等同于这样：
       <script>
         show({
           "name": "ahab",
@@ -553,6 +655,21 @@ fetch 返回一个 Promise，使得异步调用非常优雅
 `Level 3`：封装一个对象来调接口，并展现数据
 
 ```js
+// 传入最基本的配置，会合并之后调用方法时传入的配置
+const ajax = new Ajax({
+  data: JSON.stringify({
+    // 传递参数
+  }),
+  headers: {
+    // 设置请求头
+  },
+  beforeSuccess: () => { /* some codes to handle data */ },
+  afterSuccess: () => { /* some codes to handle data */ },
+  beforeError: () => { /* some codes to handle error */ },
+  afterError: () => { /* some codes to handle error */ },
+  // ...
+})
+
 // 默认 GET 请求
 ajax('http://api.xxx.com', {
   data: JSON.stringify({
@@ -560,9 +677,10 @@ ajax('http://api.xxx.com', {
   }),
   headers: {
     // 设置请求头
-  }
+  },
   success: () => { /* some codes to handle data */ },
   error: () => { /* some codes to handle error */ },
+  // ...
 })
 
 ajax.get('http://api.xxx.com', {
@@ -571,9 +689,10 @@ ajax.get('http://api.xxx.com', {
   }),
   headers: {
     // 设置请求头
-  }
+  },
   success: () => { /* some codes to handle data */ },
   error: () => { /* some codes to handle error */ },
+  // ...
 })
 
 ajax.post('http://api.xxx.com', {
@@ -585,10 +704,13 @@ ajax.post('http://api.xxx.com', {
   }
   success: () => { /* some codes to handle data */ },
   error: () => { /* some codes to handle error */ },
+  // ...
 })
+
+// ...
 ```
 
-`Level 4`：封装一个 fetch
+`Level 4`：封装一个 fetch 或者将 Level 3 Promisify
 
 ## 参考
 
