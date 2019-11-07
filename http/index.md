@@ -8,7 +8,7 @@
 
     要放到服务器上，用户通过浏览器找到该网页（URL、搜索...）
 
-2. [那我们在浏览器中输入 TodoList 的 URL 然后回车到页面加载完成发生了什么呢？](https://segmentfault.com/a/1190000013662126)
+2. 那我们在浏览器中输入 TodoList 的 URL 然后回车到页面加载完成发生了什么呢？
 
     简单回答：
 
@@ -25,6 +25,8 @@
     5. 四次挥手断开 TCP 连接
 
     以上的回答非常简单，扩展来讲可以说很多，比如：浏览器的进程线程、DNS 缓存、HTTP 缓存、浏览器怎样执行 JS、回流重绘...
+
+    [一篇文章](https://segmentfault.com/a/1190000013662126)、[又一篇文章](https://mp.weixin.qq.com/s?__biz=MzI5MjUxNjA4Mw==&mid=2247485526&idx=1&sn=f8f74a63253a656e10284ff3deeaf5b1&chksm=ec0171cadb76f8dc78473c2362a6671ce18ef6d1c6e56446b987a60f5f74a892aada67fa8523&mpshare=1&scene=23&srcid&sharer_sharetime=1573088121785&sharer_shareid=ff850364fdc08ae532955239c841ceda%23rd)
 
 3. 你们现在切图做的（静态）网页与微博这种网页有什么区别？
 
@@ -319,22 +321,7 @@ request.open('GET', API, true)
 
 #### 2. 写好需要的回调函数
 
-> 回调函数：函数 A 作为参数传递到另一个函数 B 中，并且这个函数 B 执行函数 A。我们就说函数 A 叫做回调函数
-> 
-> callback 不一定用于异步，一般同步(阻塞)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数
-> 
-> ```js
-> button.addEventListener('click', e => {
->   // some codes
-> })
->
-> function doAfter(task, after) {
->   task()
->   after()
-> }
-> ```
-> 
-> 其中 e => {} 就是一个回调函数，task、after 也是
+[我们又多了一个问题：啥是 callback？](https://codeburst.io/javascript-what-the-heck-is-a-callback-aba4da2deced)
 
 可以直接写 onreadystatechange，也可以用 addEventListener
 
@@ -372,9 +359,11 @@ request.send()
 
 ### 异步
 
-说起异步，就要先说说 JavaScript 运行机制。我们知道，JavaScript 是单线程执行的，意味着同一个时间点，只有一个任务在运行。单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不得不一直等着。
+说起异步，就要先说说 JavaScript 运行机制。我们知道，JavaScript 是**单线程**执行的，意味着同一个时间点，只有一个任务在运行。单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不得不一直等着。
 
-#### 异步解决的问题
+> JavaScript 为什么设计成单线程？
+
+#### 如果没有异步……
 
 如果没有异步，用户在发网络请求的时候，就必须等待请求响应结束，然后才能继续在页面上进行操作，等待期间页面卡住，什么都不能干…… 其他的异步也是同理，比如 addEventListener、setTimeout、setInterval、Promise……
 
@@ -386,11 +375,32 @@ request.send()
 
 #### AJAX 中的异步
 
-异步 http 请求线程
+> callback：
+> 
+> 在 JavaScript 中，函数是一等（普通）公民（函数也是对象），因此函数可以做为另一个函数的返回值或参数，当 A 函数作为 B 函数的参数时，A 就是回调函数（callback）
+> 
+> callback 不一定用于异步，一般同步(阻塞)的场景下也经常用到回调，比如要求执行某些操作后执行回调函数
+> 
+> ```js
+> button.addEventListener('click', e => {
+>   // some codes
+> })
+> 
+> function doAfter(task, after) {
+>   task()
+>   after()
+> }
+> ```
+> 
+> 其中 e => {} 就是一个回调函数，task、after 也是
+> 
+> > 当 A 函数作为 B 函数的返回值时，B 叫什么呢？
+> 
+> > 为啥 JavaScript 需要 callback？（解决的问题）
 
-在 XMLHttpRequest 在连接后是通过浏览器新开一个线程请求
+在 XMLHttpRequest 在连接后是通过浏览器新开一个线程（异步 http 请求线程）请求
 
-将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由 JavaScript 引擎执行
+将检测到状态变更时，异步线程就产生状态变更**事件**，如果设置有回调函数，则将这个回调放入事件队列中。再由 JavaScript 引擎执行
 
 ### XML？JSON？
 
@@ -546,7 +556,7 @@ request.send('name=ahab&age=18&single=true')
 3. 服务器接收到请求后，需要进行特殊的处理：把传递进来的函数名和它需要给你的数据拼接成一个字符串
 
     ```json
-    // 返回 JSON 示例
+    // 返回 JSON 的 🌰
     show({
       "name": "ahab",
       "age": 18
@@ -626,7 +636,40 @@ http.listen(8080, () => {
 })
 ```
 
+## 看看 JQuery 的 AJAX
+
+> JQuery 是什么？
+> 
+> jQuery是一套**跨浏览器**的 JavaScript 库，**简化 HTML 与 JavaScript 之间**的操作
+> 
+> 大家上次课用原生 JS 操作 DOM 写作业是不是感觉很麻烦，被 DOM 恶心到了（如果现在没有，不久后就有了 \滑稽），JQuery 就是为了让开发者不被 DOM 恶心到（方便操作）而设计出来的库
+
+我们看看用 JQuery 封装好的 ajax 函数怎么调接口：
+
+```js
+$('button').click(() => {
+  $.ajax({
+    type: 'POST',
+    url: 'demo_test.txt',
+    data: { // 相当于 send 的参数
+      name: 'LJ',
+      age: '6',
+    },
+    success(result) { // 成功的回调函数，获取到数据后渲染页面
+      $('#div1').html(result)
+    },
+    timeout: 5000, // 请求超时时间 5s
+  })
+})
+```
+
+可以看到相比于原生 `open\send...` 会方便很多，这是因为 JQuery 已经为我们封装好了，我们只需要传入相应的参数（配置）即可
+
+AJAX 这么简单，所以我们这节课作业就是封装类似的函数
+
 ## 说下 fetch 和 axios
+
+[Axios or fetch(): Which should you use?](https://blog.logrocket.com/axios-or-fetch-api/)
 
 ### fetch
 
@@ -664,9 +707,11 @@ fetch 返回一个 Promise，使得异步调用非常优雅
 
 ### axios
 
-一个非常优秀的 XMLHttpRequest 请求封装库，以后可以看看源码，能学到很多有关 Promise 和网络请求的知识与技巧
+一个非常优秀的 XMLHttpRequest 请求封装库，比 JQuery.ajax 还优秀
 
 ## 作业
+
+这节课内容有点多了，AJAX 确实能扯出来很多知识点，其实现在只需要会写 AJAX 调接口就行了，课件中带的文章现在没必要看，以后再看，那些内容随着自己的积累都会慢慢理解的 :)
 
 `Level 1`：调接口，并展现数据
 
@@ -678,7 +723,7 @@ fetch 返回一个 Promise，使得异步调用非常优雅
 // 传入最基本的配置，会合并之后调用方法时传入的配置
 const ajax = new Ajax({
   data: JSON.stringify({
-    // 传递参数
+    // 传递参数，会与之后传的合并
   }),
   headers: {
     // 设置请求头
