@@ -442,9 +442,9 @@ console.log(str)
 
 常见：
 
-1. `http://api.xxx.com/user?name=ahab&age=18&single=true`
+1. `http://api.xxx.com/user?name=ahab&age=18`
 
-2. `http://api.xxx.com/user/name/ahab/age/18/single/true`
+2. `http://api.xxx.com/user/name/ahab/age/18`
 
 我们知道 HTTP 请求方式不止 GET……
 
@@ -458,7 +458,7 @@ POST 常用与提交表单等
 request.open('POST', POSTAPI)
 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 // 这样就将数据放在了请求体（request body）中
-request.send('name=ahab&age=18&single=true')
+request.send('name=hzh&age=18&nb=true')
 ```
 
 或者其他格式, 类似 multipart/form-data、application/json 等，只要设置好请求头的相应的 Content-Type
@@ -547,7 +547,7 @@ request.send('name=ahab&age=18&single=true')
 
     ```js
     const script = document.createElement('script')
-    script.src = 'http://api.xxx.com?name=ahab&callback=show'
+    script.src = 'http://api.xxx.com?name=LJ&callback=show'
 
     const head = document.querySelector('head')
     head.appendChild(script)
@@ -558,8 +558,8 @@ request.send('name=ahab&age=18&single=true')
     ```json
     // 返回 JSON 的 🌰
     show({
-      "name": "ahab",
-      "age": 18
+      "name": "LJ",
+      "age": 6
     })
     ```
 
@@ -570,13 +570,15 @@ request.send('name=ahab&age=18&single=true')
     ```html
     <html>
     <head>
-      <script src="http://api.xxx.com?name=ahab&callback=show"></script>
+      <title>JSONP 🌰</title>
+      <!-- 动态添加的 -->
+      <script src="http://api.xxx.com?name=LJ&callback=show"></script>
       <!--
       上面那行等同于这样：
       <script>
         show({
-          "name": "ahab",
-          "age": 18
+          "name": "LJ",
+          "age": 6
         })
       </script>
       -->
@@ -589,7 +591,7 @@ request.send('name=ahab&age=18&single=true')
     }
 
     const script = document.createElement('script')
-    script.src = 'http://api.xxx.com?name=ahab&callback=show'
+    script.src = 'http://api.xxx.com?name=LJ&callback=show'
 
     const head = document.querySelector('head')
     head.appendChild(script)
@@ -624,7 +626,7 @@ const cors = res => {
 }
 
 http.createServer((request, response) => {
-  cors(response) // 从这里也可以看出是对响应的处理，加几个响应头告诉浏览器这个响应不要 🚫
+  cors(response) // 从这里也可以看出是对响应的处理，加几个响应头告诉浏览器这个响应不要限制 🚫
 
   // some codes
 
@@ -653,7 +655,7 @@ $('button').click(() => {
     url: 'demo_test.txt',
     data: { // 相当于 send 的参数
       name: 'LJ',
-      age: '6',
+      age: 6,
     },
     success(result) { // 成功的回调函数，获取到数据后渲染页面
       $('#div1').html(result)
