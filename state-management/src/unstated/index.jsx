@@ -16,7 +16,7 @@ class CounterContanier extends Container {
 
 const CounterDisplayer = () => (
   <Subscribe to={[CounterContanier]}>
-    {counter => <div>{counter.state.count}</div>}
+    {counter => <div>count: {counter.state.count}</div>}
   </Subscribe>
 )
 

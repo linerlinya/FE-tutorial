@@ -37,7 +37,7 @@ const CounterController = () => {
 
 const UnstatedNextCounter = () => (
   <Counter.Provider>
-    <h2>unstated-next Counter</h2>
+    <h2>Unstated-next Counter</h2>
     <CounterDisplayer />
     <CounterController />
   </Counter.Provider>
@@ -66,3 +66,5 @@ export default UnstatedNextCounter
 // )
 
 // const Provider = combineProvider(Counter.Provider, Timer.Provider, Theme.Provider)
+
+// 可以看看 reunx 🙈

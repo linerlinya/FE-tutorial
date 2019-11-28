@@ -7,8 +7,14 @@
   <title>Document</title>
 </head>
 <body>
+  <div>
+    <input type="text" class="input" />
+    <button>search</button>
+  </div>
 <script>
-fetch('https://api.github.com/search/repositories?q=react+in:name&sort=stars&order=desc')
+const input = document.querySelector('.input')
+
+fetch('https://music.niubishanshan.top/api/v2/music/search//1/10')
   .then(r => r.json())
   .then(console.log)
 </script>

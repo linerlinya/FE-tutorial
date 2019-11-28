@@ -5,6 +5,8 @@ import UnstatedCounter from './unstated'
 import ChroxCounter from './chrox'
 import UnstatedNextCounter from './unstated-next'
 
+import MobxCounter from './mobx'
+
 function App() {
   return (
     <div>
@@ -13,6 +15,8 @@ function App() {
       <UnstatedCounter />
       <ChroxCounter />
       <UnstatedNextCounter />
+
+      <MobxCounter />
     </div>
   )
 }
