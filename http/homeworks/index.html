@@ -9,14 +9,94 @@
 <body>
   <div>
     <input type="text" class="input" />
-    <button>search</button>
+    <button class="btn">search</button>
+    <ul class="song-list"></ul>
   </div>
 <script>
-const input = document.querySelector('.input')
+const API = 'https://music.niubishanshan.top/api/v2/music/search/'
 
-fetch('https://music.niubishanshan.top/api/v2/music/search//1/10')
-  .then(r => r.json())
-  .then(console.log)
+const input = document.querySelector('.input')
+const btn = document.querySelector('.btn')
+const ul = document.querySelector('.song-list')
+
+// Level 2，封装的 ajax 方法
+const ajax = ({ type, url, data, success, error } = {}) => {
+  const formatData = (data) => `?${Object.keys(data).reduce((acc, cur) => `${acc}&${cur}=${data[cur]}`, '').slice(1)}`
+  // 上面这行等价于下面这个
+  // function formatData(data) {
+  //   let params = '?'
+  //   for (key in data) {
+  //     if (data.hasOwnProperty(key)) {
+  //       params += `${key}=${data[key]}&`
+  //     }
+  //   }
+  //   params.slice(params.length - 1)
+  //   return params
+  // }
+  const upperCaseType = type.toUpperCase()
+  const params = formatData(data)
+
+  const req = new XMLHttpRequest()
+
+  req.onreadystatechange = () => {
+    if (req.readyState === 4) {
+      if (req.status >= 200 && req.status < 300 || req.status === 304) {
+        success(req)
+      } else {
+        error(req)
+      }
+    }
+  }
+
+  if (upperCaseType === 'GET') {
+    req.open(upperCaseType, url + params)
+    req.send()
+  }
+
+  if (upperCaseType === 'POST') {
+    req.open(upperCaseType, url)
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    req.send(params)
+  }
+}
+
+btn.addEventListener('click', () => ajax({
+  type: 'GET',
+  url: API + input.value,
+  success: function (req) {
+    const json = JSON.parse(req.responseText)
+    const { data: { songList } } = json
+    // 解构，这样可读性其实还不如 const songList = json.data.songList，所以没有必要什么时候都用 es6 的简写
+    const html = songList.map(e => `<li>${e.songMid}</li>`).join('')
+    // 其实一次 map 就可以
+    ul.innerHTML = html
+  },
+}))
+
+// Level 1，没有封装
+// btn.addEventListener('click', () => {
+//   const req = new XMLHttpRequest()
+//   const keyword = input.value
+
+//   req.open('GET', API + keyword)
+//   req.onreadystatechange = function () {
+//     if (req.readyState === 4) {
+//       if (req.status >= 200 && req.status < 300 || req.status === 304) {
+//         const json = JSON.parse(req.responseText)
+//         const { data } = json
+//         const { songList } = data
+//         const idList = songList.map(e => e.songMid)
+//         const html = idList.map(str => `<li>${str}</li>`).join('')
+
+//         ul.innerHTML = html
+//       } else {
+//         console.log('请求错误')
+//       }
+//     }
+//   }
+
+//   req.send()
+// })
 </script>
 </body>
 </html>

@@ -83,11 +83,15 @@ function foo() {
   const a = 1
 
   function bar() {
-    console.log(b)
+    const b = 2
+
+    console.log(a, b)
   }
 
   bar()
 }
+
+foo()
 ```
 
 画那张作用域包作用域的图
